@@ -102,3 +102,14 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Mac OS
+.DS_Store
+
+# VS Code
+.vs_code
+.editorconfig
+
+# other
+package-lock.json
+tsconfig.json
