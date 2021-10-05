@@ -7,4 +7,4 @@
 ---
 
 ## API元
-- (openBD | 書誌情報・書影を自由に)[https://openbd.jp/]
+- [openBD | 書誌情報・書影を自由に](https://openbd.jp/)
