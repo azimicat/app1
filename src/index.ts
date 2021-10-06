@@ -9,7 +9,7 @@ const requestUrl = url.concat("?isbn=", isbn, "&", option);
 // リクエストURLの確認
 console.log(requestUrl);
 
-request(requestUrl, function (error, response, data) {
+request(requestUrl, function (error: any, response: any, data: any) {
   if (error != null) {
     console.error("error:", error);
   }
