@@ -111,5 +111,4 @@ dist
 .editorconfig
 
 # other
-package-lock.json
 tsconfig.json
