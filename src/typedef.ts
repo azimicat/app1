@@ -1,74 +1,243 @@
+interface Jyuhan {
+  date: string;
+  ctime: string;
+  suri: string;
+  comment: string;
+}
+
+interface PersonName {
+  collationkey: string;
+  content: string;
+}
+
+interface Author {
+  listseq: string;
+  dokujikubun: string;
+}
+
 interface ProductIdentifier {
-  productIDType: string;
-  iDValue: string;
+  ProductIDType: string;
+  IDValue: string;
+}
+
+interface Contributor {
+  SequenceNumber: string;
+  ContributorRole: string[];
+  PersonName: PersonName;
+}
+
+interface PersonName {
+  content: string;
+}
+
+interface Measure {
+  MeasureType: string;
+  Measurement: string;
+  MeasureUnitCode: string;
 }
 
 interface DescriptiveDetail {
-  productComposition: string;
+  ProductComposition: string;
   ProductForm: string;
-  contributor: Contributor;
+  ProductFormDetail: string;
+  Measure: Measure[];
+  Collection: {
+    CollectionType: string;
+    TitleDetail: {
+      TitleType: string;
+      TitleElement: [
+        {
+          TitleElementLevel: string;
+          TitleText: {
+            content: string;
+          }
+        }
+      ]
+    }
+  }
+  TitleDetail: {
+    TitleType: string;
+    TitleElement: {
+      TitleElementLevel: string;
+      TitleText: {
+        collationkey: string;
+        content: string;
+      };
+      Subtitle: {
+        collationkey: string;
+        content: string;
+      };
+    };
+  };
+  Contributor: Contributor[];
+  Language: [
+    {
+      LanguageRole: string;
+      LanguageCode: string;
+      CountryCode: string;
+    }
+  ];
+  Extent: [
+    {
+      ExtentType: string;
+      ExtentValue: string;
+      ExtentUnit: string;
+    }
+  ];
+  Subject: [
+    {
+      MainSubject: string;
+      SubjectSchemeIdentifier: string;
+      SubjectCode: string;
+    },
+    {
+      SubjectSchemeIdentifier: string;
+      SubjectCode: string;
+    }
+  ];
 }
 
-interface Contributor {}
-interface CollateralDetail {}
-interface PublishingDetail {}
-interface ProductSupply {}
+interface TextContent {
+  TextType: string;
+  ContentAudience: string;
+  Text: string;
+}
 
 interface Onix {
-  recordReference: string;
-  notificationType: string;
-  productIdentifier: ProductIdentifier;
-  descriptiveDetail: DescriptiveDetail;
-  collateralDetail: CollateralDetail;
-  publishingDetail: PublishingDetail;
-  productSupply: ProductSupply;
-}
-interface Hanmoto {
-  dateshuppan?: string;
-  datemodified?: string;
-  datecreated?: string;
-  lanove?: string;
-  hasshohyo?: string;
-  hastameshiyomi?: string;
-  reviews?: Reviews;
-  summary?: Summary;
-  hanmotoinfo?: Hanmotoinfo;
-}
-interface Hanmotoinfo {
-  name?: string;
-  yomi?: string;
-  url?: string;
-  twitter?: string;
-  facebook?: string;
-}
-interface Summary {
-  isbn?: string;
-  title?: string;
-  volume?: string;
-  series?: string;
-  publisher?: string;
-  pubdate?: string;
-  cover?: string;
-  author?: string;
-}
-interface Reviews {
-  appearance?: string;
-  reviewer?: string;
-  source_id?: string;
-  kubun_id?: string;
-  source?: string;
-  choyukan?: string;
-  han?: string;
-  link?: string;
-  post_user?: string;
-}
-export interface Reference {
-  onix?: Onix;
-  hanmoto?: Hanmoto;
-  summary?: Summary;
+  RecordReference: string;
+  NotificationType: string;
+  ProductIdentifier: ProductIdentifier;
+  DescriptiveDetail: DescriptiveDetail;
+  CollateralDetail: {
+    TextContent: TextContent[];
+    SupportingResource: [
+      {
+        ResourceContentType: string;
+        ContentAudience: string;
+        ResourceMode: string;
+        ResourceVersion: [
+          {
+            ResourceForm: string;
+            ResourceVersionFeature: [
+              {
+                ResourceVersionFeatureType: string;
+                FeatureValue: string;
+              },
+              {
+                ResourceVersionFeatureType: string;
+                FeatureValue: string;
+              }
+            ];
+            ResourceLink: string;
+          }
+        ];
+      }
+    ];
+  };
+  PublishingDetail: {
+    Imprint: Imprint;
+    PublishingDate: PublishingDate[];
+  };
+  ProductSupply: ProductSupply;
 }
 
-export interface Response {
-  data: Reference[];
-  statusCode: Number;
+interface Imprint {
+  ImprintIdentifier: ImprintIdentifier[];
+  ImprintName: string;
+}
+
+interface PublishingDate {
+  PublishingDateRole: string;
+  Date: string;
+}
+
+interface ProductSupply {
+  MarketPublishingDetail: MarketPublishingDetail;
+  SupplyDetail: SupplyDetail;
+}
+
+interface MarketPublishingDetail {
+  MarketPublishingStatus: string;
+  MarketPublishingStatusNote: string;
+}
+
+interface SupplyDetail {
+  ProductAvailability: string;
+  Price: Price[];
+}
+
+interface Price {
+  PriceType: string;
+  PriceAmount: string;
+  CurrencyCode: string;
+}
+
+interface ImprintIdentifier {
+  ImprintIDType: string;
+  IDValue: string;
+}
+
+interface Hanmoto {
+  toji: string;
+  zaiko: string;
+  maegakinado: string;
+  kaisetsu105w: string;
+  tsuiki: string;
+  genrecodetrc: string;
+  ndccode: string;
+  kankoukeitai: string;
+  sonotatokkijikou: string;
+  jushoujouhou: string;
+  furokusonota: string;
+  dokushakakikomi: string;
+  zasshicode: string;
+  jyuhan: Jyuhan[];
+  hatsubai: string;
+  hatsubaiyomi: string;
+  hastameshiyomi: true;
+  author: Author[];
+  datemodified: string;
+  datecreated: string;
+  kanrenshoisbn: string;
+  reviews: Review[];
+  hanmotoinfo: Hanmotoinfo;
+  dateshuppan: string;
+}
+
+interface Hanmotoinfo {
+  name: string;
+  yomi: string;
+  url: string;
+  twitter: string;
+  facebook: string;
+}
+
+interface Summary {
+  isbn: string;
+  title: string;
+  volume: string;
+  series: string;
+  publisher: string;
+  pubdate: string;
+  cover: string;
+  author: string;
+}
+
+interface Review {
+  post_user: string;
+  reviewer: string;
+  source_id: string;
+  kubun_id: string;
+  source: string;
+  choyukan: string;
+  han: string;
+  link: string;
+  appearance: string;
+  gou: string;
+}
+
+export interface OpenDBDescriptiveData {
+  onix: Onix;
+  hanmoto: Hanmoto;
+  summary: Summary;
 }
