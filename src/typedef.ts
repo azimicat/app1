@@ -50,11 +50,11 @@ interface DescriptiveDetail {
           TitleElementLevel: string;
           TitleText: {
             content: string;
-          }
+          };
         }
-      ]
-    }
-  }
+      ];
+    };
+  };
   TitleDetail: {
     TitleType: string;
     TitleElement: {
@@ -70,31 +70,27 @@ interface DescriptiveDetail {
     };
   };
   Contributor: Contributor[];
-  Language: [
-    {
-      LanguageRole: string;
-      LanguageCode: string;
-      CountryCode: string;
-    }
-  ];
-  Extent: [
-    {
-      ExtentType: string;
-      ExtentValue: string;
-      ExtentUnit: string;
-    }
-  ];
-  Subject: [
-    {
-      MainSubject: string;
-      SubjectSchemeIdentifier: string;
-      SubjectCode: string;
-    },
-    {
-      SubjectSchemeIdentifier: string;
-      SubjectCode: string;
-    }
-  ];
+  Language: Language[];
+  Extent: Extent[];
+  Subject: Subject[];
+}
+
+interface Language {
+  LanguageRole: string;
+  LanguageCode: string;
+  CountryCode: string;
+}
+
+interface Subject {
+  MainSubject: string;
+  SubjectSchemeIdentifier: string;
+  SubjectCode: string;
+}
+
+interface Extent {
+  ExtentType: string;
+  ExtentValue: string;
+  ExtentUnit: string;
 }
 
 interface TextContent {
