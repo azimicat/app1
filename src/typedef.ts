@@ -45,36 +45,36 @@ interface DescriptiveDetail {
     CollectionType: string;
     TitleDetail: {
       TitleType: string;
-      TitleElement: [
-        {
-          TitleElementLevel: string;
-          TitleText: {
-            content: string;
-          };
-        }
-      ];
+      TitleElement: TitleElement[];
     };
   };
-  TitleDetail: {
-    TitleType: string;
-    TitleElement: {
-      TitleElementLevel: string;
-      TitleText: {
-        collationkey: string;
-        content: string;
-      };
-      Subtitle: {
-        collationkey: string;
-        content: string;
-      };
-    };
-  };
+  TitleDetail: TitleDetail;
   Contributor: Contributor[];
   Language: Language[];
   Extent: Extent[];
   Subject: Subject[];
 }
 
+interface TitleDetail {
+  TitleType: string;
+  TitleElement: TitleElement;
+}
+
+interface TitleElement {
+  TitleElementLevel: string;
+  TitleText: TitleText;
+  Subtitle: Subtitle;
+}
+
+interface TitleText {
+  collationkey: string;
+  content: string;
+}
+
+interface Subtitle {
+  collationkey: string;
+  content: string;
+}
 interface Language {
   LanguageRole: string;
   LanguageCode: string;
