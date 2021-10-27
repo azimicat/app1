@@ -106,35 +106,33 @@ interface Onix {
   DescriptiveDetail: DescriptiveDetail;
   CollateralDetail: {
     TextContent: TextContent[];
-    SupportingResource: [
-      {
-        ResourceContentType: string;
-        ContentAudience: string;
-        ResourceMode: string;
-        ResourceVersion: [
-          {
-            ResourceForm: string;
-            ResourceVersionFeature: [
-              {
-                ResourceVersionFeatureType: string;
-                FeatureValue: string;
-              },
-              {
-                ResourceVersionFeatureType: string;
-                FeatureValue: string;
-              }
-            ];
-            ResourceLink: string;
-          }
-        ];
-      }
-    ];
+    SupportingResource: SupportingResource[];
   };
-  PublishingDetail: {
-    Imprint: Imprint;
-    PublishingDate: PublishingDate[];
-  };
+  PublishingDetail: PublishingDetail;
   ProductSupply: ProductSupply;
+}
+
+interface PublishingDetail {
+  Imprint: Imprint;
+  PublishingDate: PublishingDate[];
+}
+
+interface SupportingResource {
+  ResourceContentType: string;
+  ContentAudience: string;
+  ResourceMode: string;
+  ResourceVersion: ResourceVersion[];
+}
+
+interface ResourceVersion {
+  ResourceForm: string;
+  ResourceVersionFeature: ResourceVersionFeature[];
+  ResourceLink: string;
+}
+
+interface ResourceVersionFeature {
+  ResourceVersionFeatureType: string;
+  FeatureValue: string;
 }
 
 interface Imprint {
