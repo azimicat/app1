@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/azimicat/app1#readme",
   "dependencies": {
+    "@vue/cli": "^5.0.4",
     "node-rest-client": "^1.4.4",
     "ts-node": "^10.2.1",
     "tsconfig-paths": "^3.11.0",
